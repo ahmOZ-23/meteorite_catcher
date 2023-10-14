@@ -1,0 +1,62 @@
+Script started on 2023-10-14 00:24:34+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="86" LINES="26"]
+[?2004h]0;aaosman2@my-cs400-vm: ~/cs400/p1[01;32maaosman2@my-cs400-vm[00m:[01;34m~/cs400/p1[00m$ git status
+[?2004lOn branch frontend
+Your branch is ahead of 'origin/frontend' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[31mlog[m
+
+nothing added to commit but untracked files present (use "git add" to track)
+[?2004h]0;aaosman2@my-cs400-vm: ~/cs400/p1[01;32maaosman2@my-cs400-vm[00m:[01;34m~/cs400/p1[00m$ git log -1
+[?2004l[?1h=[33mcommit e2d1746d34f95e368a2f3eee0a4f0b7c58a3e816[m[33m ([m[1;36mHEAD -> [m[1;32mfrontend[m[33m)[m[m
+Author: Ahmed Osman <aaosman2@wisc.edu>[m
+Date:   Sat Oct 14 00:24:16 2023 +0000[m
+[m
+    modified makefile[m
+[K[?1l>[?2004h]0;aaosman2@my-cs400-vm: ~/cs400/p1[01;32maaosman2@my-cs400-vm[00m:[01;34m~/cs400/p1[00m$ make clean 
+[?2004lrm *.class
+[?2004h]0;aaosman2@my-cs400-vm: ~/cs400/p1[01;32maaosman2@my-cs400-vm[00m:[01;34m~/cs400/p1[00m$ ls
+[?2004lBackendInterface.java                           Makefile
+BackendPlaceholder.java                         Meteorite.java
+Frontend.java                                   MeteoritePlaceholder.java
+FrontendDeveloperTesters.java                   SortedCollectionInterface.java
+FrontendInterface.java                          TextUITester.java
+IterableMultiKeySortedCollectionInterface.java  log
+KeyListInterface.java                           meteorites.csv
+[?2004h]0;aaosman2@my-cs400-vm: ~/cs400/p1[01;32maaosman2@my-cs400-vm[00m:[01;34m~/cs400/p1[00m$ make runFDTests 
+[?2004ljavac -cp ../junit5.jar:. *.java
+java -jar ../junit5.jar --class-path=. --select-class=FrontendDeveloperTesters
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+[36m╷[0m
+[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
+[36m│  └─[0m [36mFrontendDeveloperTesters[0m [32m✔[0m
+[36m│     ├─[0m [34mtest1()[0m [32m✔[0m
+[36m│     ├─[0m [34mtest2()[0m [32m✔[0m
+[36m│     ├─[0m [34mtest3()[0m [32m✔[0m
+[36m│     ├─[0m [34mtest4()[0m [32m✔[0m
+[36m│     └─[0m [34mtest5()[0m [32m✔[0m
+[36m├─[0m [36mJUnit Vintage[0m [32m✔[0m
+[36m└─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+
+Test run finished after 225 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         5 tests successful      ]
+[         0 tests failed          ]
+
+[?2004h]0;aaosman2@my-cs400-vm: ~/cs400/p1[01;32maaosman2@my-cs400-vm[00m:[01;34m~/cs400/p1[00m$ exir[Kr[Kt
+[?2004lexit
+
+Script done on 2023-10-14 00:25:28+00:00 [COMMAND_EXIT_CODE="0"]
