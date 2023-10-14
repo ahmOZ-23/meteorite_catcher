@@ -1,4 +1,3 @@
-package p1;
 
 /**
  * An interface for a class that defines a single meteorite and exposes properties required by the 
@@ -6,7 +5,7 @@ package p1;
  *
  * This interface extends the KeyListInterface to help store multiple objects in each node of the tree
  */
-interface Meteorite<T extends Comparable<T>> extends KeyListInterface<T> {
+interface Meteorite extends Comparable<Meteorite> {
     // public Meteorite(){ // default constructor
     // name = "";
     // latitude = 0.0;

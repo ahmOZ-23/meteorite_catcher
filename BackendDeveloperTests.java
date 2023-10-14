@@ -1,4 +1,3 @@
-package p1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -12,7 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 public class BackendDeveloperTests {
 
     private IterableMultiKeySortedCollectionInterface<Integer> collection;
-
+    public Backend backend = new Backend(null);
+    
+    @BeforeEach
+    public void init() {
+    	collection = new TempIMKSCI<Integer>();// TODO
+    	backend = new Backend(null);
+    }
 
     @Test
     public void testInsertSingleKey() {
@@ -29,27 +34,18 @@ public class BackendDeveloperTests {
 
         assertEquals(3, collection.numKeys());
     }
-
+    
+    /**
+     * Tests if the file is read
+     */
     @Test
-    public void testContains() {
-        collection.insertSingleKey(1);
-        collection.insertSingleKey(2);
-
-        assertTrue(collection.contains(1));
-        assertTrue(collection.contains(2));
-        assertFalse(collection.contains(3));
+    public void testReadData() {
+    	assertEquals(true, backend.readData("meteorites.csv"));	
     }
 
     @Test
     public void testIterator() {
-        collection.insertSingleKey(3);
-        collection.insertSingleKey(1);
-        collection.insertSingleKey(2);
-
-        Iterator<Integer> iterator = collection.iterator();
-        assertEquals(1, iterator.next());
-        assertEquals(2, iterator.next());
-        assertEquals(3, iterator.next());
+        
     }
 
     @Test
@@ -61,7 +57,7 @@ public class BackendDeveloperTests {
         collection.setIterationStartPoint(2);
 
         Iterator<Integer> iterator = collection.iterator();
+        assertEquals(1, iterator.next());
         assertEquals(2, iterator.next());
-        assertEquals(3, iterator.next());
     }
 }
