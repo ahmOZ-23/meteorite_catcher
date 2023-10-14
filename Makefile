@@ -1,7 +1,7 @@
-run: compile
+runFDTests: compile
 	java -jar ../junit5.jar --class-path=. --select-class=FrontendDeveloperTesters
 compile:
-    javac -cp ../junit5.jar:. *.java
+	javac -cp ../junit5.jar:. *.java
 clean:
-    rm *.class
+	rm *.class
 
