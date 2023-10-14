@@ -4,8 +4,7 @@
  *
  * This interface extends the KeyListInterface to help store multiple objects in each node of the tree
  */
-interface MeteoriteInterface<T extends Comparable<T>> extends KeyListInterface<T> {
-
+interface Meteorite extends Comparable<Meteorite> {
   // public Meteorite(){ // default constructor
   // name = "";
   // latitude = 0.0;
@@ -34,15 +33,11 @@ interface MeteoriteInterface<T extends Comparable<T>> extends KeyListInterface<T
    */
   public double getLatitude();
 
-  /**
-   * @return the longitude of the meteorite.
-   */
-  public double getLongitude();
 
   /**
    * @return the fall of the meteorite.
    */
-  public String getFall();
+  public double getFall();
 
   /**
    * @return the mass of the meteorite (in grams).

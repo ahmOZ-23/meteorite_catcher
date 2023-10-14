@@ -2,7 +2,7 @@
 // Title: Backend Interface
 // Course: CS 400 Fall 2023
 ///////////////////////////////////////
-
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.File;
 
@@ -11,27 +11,29 @@ import java.io.File;
  * data from a file, get a list of meteorites with the maximum mass in the data set, get a list
  * of meteorites with a mass between two specified thresholds.
  *
- * This interface extends the IterableMultiKeySortedCollectionInterface to iterate over the 
+ * This interface extends the IterableMultiKeySortedCollectionInterface to iterate over the
  * keys and values stored in the data structure.
  */
-public interface BackendInterface<T extends Comparable<T>> extends MeteoriteInterface<T>, 
-                 IterableMultiKeySortedCollectionInterface<T>, Iterable<T> {
+public interface BackendInterface{
+    /*
+     * public BackendInterface(IterableMultiKeySortedCollectionInterface imksci);
+     */
     /**
-     * Reads data from a CSV formatted file and stores it as a string.
-     * @param fileName the name of the file the data is to be read from. 
+     * Reads data from a CSV formatted file and stsores it as a string.
+     * @param fileName the name of the file the data is to be read from.
      */
     public void readData(File fileName);
 
     /**
      * @return a list of meteorites with the maximum mass in the data set.
      */
-    public T[] listMaxMass();
+    public ArrayList<Meteorite> listMaxMass();
 
     /**
      * @return a list of meteorites with a mass between two specified thresholds.
      * @param lowerBound the lower bound of the specified threshold.
      * @param higherBound the higher bound of the specified threshold.
      */
-    public T[] listBoundedMass(double lowerBound, double higherBound);
+    public ArrayList<Meteorite> listBoundedMass(double lowerBound, double higherBound);
 
 }
