@@ -5,34 +5,41 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import org.junit.jupiter.api.BeforeEach;
 
 public class BackendDeveloperTests {
 
-    private IterableMultiKeySortedCollectionInterface<Integer> collection;
+    private IterableMultiKeySortedCollectionInterface<Meteorite> collection;
     public Backend backend = new Backend(null);
     
     @BeforeEach
     public void init() {
-    	collection = new TempIMKSCI<Integer>();// TODO
-    	backend = new Backend(null);
+    	collection = new TempIMKSCI<Meteorite>();// TODO
+    	backend = new Backend(collection);
     }
 
+    /**
+     * tests if listMaxMass gets the max mass of the test.csv.
+     */
     @Test
-    public void testInsertSingleKey() {
-        assertTrue(collection.insertSingleKey(1));
-        assertTrue(collection.insertSingleKey(2));
-        assertFalse(collection.insertSingleKey(1)); // Duplicate key, should return false
+    public void testlistMaxMass() {
+    	backend.readData("test.csv");
+    	ArrayList<Meteorite> arr =  backend.listMaxMass();
+    	assertEquals(4239, arr.get(0).getMass());
+    	
     }
 
+    /**
+     * tests if compareTo compares correctly with the Acapulco meteor from the test.csv
+     */
     @Test
-    public void testNumKeys() {
-        collection.insertSingleKey(1);
-        collection.insertSingleKey(2);
-        collection.insertSingleKey(3);
-
-        assertEquals(3, collection.numKeys());
+    public void testcompareTo() {
+        Meteor test = new Meteor("Acapulco", 16.883330, 1976, 1800);
+        backend.readData("test.csv");
+    	ArrayList<Meteorite> arr =  backend.listBoundedMass(1800, 2000);
+    	assertEquals(0, arr.get(0).compareTo(test));
     }
     
     /**
@@ -40,24 +47,29 @@ public class BackendDeveloperTests {
      */
     @Test
     public void testReadData() {
-    	assertEquals(true, backend.readData("meteorites.csv"));	
+    	assertEquals(true, backend.readData("test.csv"));	
     }
 
+    /**
+     * tests the listBoundedMass, it should get only 1800 and 1801 from the test.csv
+     */
     @Test
-    public void testIterator() {
-        
+    public void testlistBoundedMass() {
+    	backend.readData("test.csv");
+    	ArrayList<Meteorite> arr =  backend.listBoundedMass(1800, 1801);
+    	assertEquals(1800, arr.get(0).getMass());
+    	assertEquals(1801, arr.get(1).getMass());
     }
 
+    /**
+     * test the accuracy of the read from the backend.readData, it should spit out all 3 meteor objects
+     */
     @Test
-    public void testSetIterationStartPoint() {
-        collection.insertSingleKey(3);
-        collection.insertSingleKey(1);
-        collection.insertSingleKey(2);
-
-        collection.setIterationStartPoint(2);
-
-        Iterator<Integer> iterator = collection.iterator();
-        assertEquals(1, iterator.next());
-        assertEquals(2, iterator.next());
+    public void testReadAccuracy() {
+    	backend.readData("test.csv");
+    	ArrayList<Meteorite> arr =  backend.listBoundedMass(1800, 10000);
+    	assertEquals(1800, arr.get(0).getMass());
+    	assertEquals(1801, arr.get(1).getMass());
+    	assertEquals(4239, arr.get(2).getMass());
     }
 }

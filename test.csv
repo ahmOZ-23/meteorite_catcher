@@ -1,0 +1,4 @@
+name,id,nametype,recclass,mass,fall,year,reclat,reclong,GeoLocation
+Acapulco,10,Valid,Acapulcoite,1800,Fell,1976,16.883330,-99.900000,"(16.883330, -99.900000)"
+Achiras,370,Valid,L6,1801,Fell,1902,-33.166670,-64.950000,"(-33.166670, -64.950000)"
+Adhi Kot,379,Valid,EH4,4239,Fell,1919,32.100000,71.800000,"(32.100000, 71.800000)"

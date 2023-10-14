@@ -27,23 +27,32 @@ public class Meteor implements Meteorite{
 		
 	@Override
 	public int compareTo(Meteorite o) {
-		if(this.fall != o.getFall()) 
-		{
-			return 0;
+		if(!this.name.equals(o.getName())) {
+			return this.name.compareTo(o.getName());
 		}
-		if(this.mass != o.getMass()) 
-		{
-			return 0;
+		if(!(this.getMass()-o.getMass() < 0.01)) {
+			return Double.valueOf(mass).compareTo(o.getMass());
 		}
-		if(this.latitude != o.getLatitude()) 
-		{
-			return 0;
-		}
-		if(this.name != o.getName()) 
-		{
-			return 0;
-		}
-		return 1;
+//		if(this.fall != o.getFall()) {
+//			return (int)((this.fall-o.getFall())*1000);
+//		}
+//		if(this.fall != o.getFall()) 
+//		{
+//			return 0;
+//		}
+//		if(this.mass != o.getMass()) 
+//		{
+//			return 0;
+//		}
+//		if(this.latitude != o.getLatitude()) 
+//		{
+//			return 0;
+//		}
+//		if(this.name != o.getName()) 
+//		{
+//			return 0;
+//		}
+		return 0;
 	}
 
 	@Override
