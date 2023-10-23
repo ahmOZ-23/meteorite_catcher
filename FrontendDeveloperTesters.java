@@ -11,6 +11,15 @@ public class FrontendDeveloperTesters {
 
     FrontendInterface frontend = new Frontend (backend); // frontend object for testing
 
+    /**
+     * creates a new backend object for each test.
+     */
+    @BeforeEach
+    public void init(){
+        backend = new BackendPlaceholder(); // will be changed by the finial backend implementation
+        frontend = new Frontend (backend);
+    }
+
 
     /**
      * test when no meteorite was found in the given bound?
@@ -75,6 +84,32 @@ public class FrontendDeveloperTesters {
         frontend.startLoop();// should be a scanner in this method
         String  message = uiTester.checkOutput();
         assertTrue(message.contains("No upper bound entered")); // checks the outputted error message
+    }
+
+    /**
+     * checks the validity of the loadfile command when the user enters a valid file name
+     * should return a list of meteorites with the maximum mass in the data set.
+     */
+    @Test
+    public void backendTest1(){
+        TextUITester uiTester = new TextUITester("loadfile test.csv\nlist greatest\nexit\n");
+        assertDoesNotThrow(frontend.startLoop(), "Your code throws an exception on a valid command");// should be a scanner in this method
+        String  message = uiTester.checkOutput();
+        //checks if the outputted list contains the excpected masses
+        assertTrue(message.contains(107000)); // checks if the outputted list contains valid meteorites
+    }
+
+    /**
+     * checks the output of the listBetweenMasses sub-menu when the user eenters a valid range
+     * should return a list of all the meteorites in the given range
+     */
+    @Test
+    public void backendTest2(){
+        TextUITester uiTester = new TextUITester("list between 10 400\nexit\n");
+        assertDoesNotThrow(frontend.startLoop(), "Your code throws an exception on a valid command");// should be a scanner in this method
+        String  message = uiTester.checkOutput();
+        //checks if the outputted list contains the excpected masses
+        assertTrue(message.contains(390) && message.contains(21)); // checks if the outputted list contains valid meteorites
     }
 
 
