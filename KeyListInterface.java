@@ -1,3 +1,4 @@
+
 /**
  * This is the interface of a type that will allow us to store duplicate keys in a single node of a tree.
  */

@@ -11,18 +11,18 @@ import java.io.File;
  * data from a file, get a list of meteorites with the maximum mass in the data set, get a list
  * of meteorites with a mass between two specified thresholds.
  *
- * This interface extends the IterableMultiKeySortedCollectionInterface to iterate over the
+ * This interface extends the IterableMultiKeySortedCollectionInterface to iterate over the 
  * keys and values stored in the data structure.
  */
 public interface BackendInterface{
-    /*
-     * public BackendInterface(IterableMultiKeySortedCollectionInterface imksci);
-     */
+	/*
+	 * public BackendInterface(IterableMultiKeySortedCollectionInterface imksci);
+	 */
     /**
      * Reads data from a CSV formatted file and stsores it as a string.
-     * @param fileName the name of the file the data is to be read from.
+     * @param fileName the name of the file the data is to be read from. 
      */
-    public void readData(File fileName);
+    public boolean readData(String fileName);
 
     /**
      * @return a list of meteorites with the maximum mass in the data set.
