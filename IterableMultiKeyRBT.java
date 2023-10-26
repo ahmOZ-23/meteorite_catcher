@@ -31,7 +31,7 @@ public class IterableMultiKeyRBT<T extends Comparable<T>> extends RedBlackTree<K
    */
   @Override
   public boolean insertSingleKey(T key) {
-    KeyListInterface<T> keyList = new KeyList<>(key); // creating a new key list object to compare
+    KeyListInterface<T> keyList = new KeyItem<>(key); // creating a new key list object to compare
    // checking if the key is already in the tree
     if (contains(keyList)) {
       KeyListInterface<T> node = findNode(keyList).data;
@@ -150,8 +150,8 @@ public class IterableMultiKeyRBT<T extends Comparable<T>> extends RedBlackTree<K
     }
     boolean inserted = super.insert(data);
     if (inserted){
-      KeyList<T> keyList = (KeyList<T>) data;
-      numKeys += keyList.keyList.size();
+      KeyItem<T> keyList = (KeyItem<T>) data;
+      numKeys += keyList.keys.size();
     }
     return inserted;
   }
@@ -307,7 +307,7 @@ public class IterableMultiKeyRBT<T extends Comparable<T>> extends RedBlackTree<K
         tree.insertSingleKey(4);
         Assertions.assertFalse(tree.insertSingleKey(4)); // checking that a new node was not made
         // inserting a list of keys
-        KeyListInterface<Integer> keyList = new KeyList<>(5);
+        KeyListInterface<Integer> keyList = new KeyItem<>(5);
         keyList.addKey(5);
         keyList.addKey(5);
 

@@ -78,4 +78,8 @@ public class Meteor implements Meteorite{
 		return this.mass;
 	}
 
+	public String toString() {
+		return this.name + ", " + this.latitude + ", " + this.fall + ", " + this.mass;
+	}
+
 }

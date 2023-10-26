@@ -17,7 +17,8 @@ public class Backend implements BackendInterface {
 	 * 
 	 * @param fileName the name of the file the data is to be read from.
 	 */
-	public boolean readData(String fileName) {
+	@Override
+	public boolean readData (String fileName) {
 		try {
 			arr = parseCSV(fileName);
 			for (int i = 1; i < arr.size(); ++i) {
@@ -29,8 +30,8 @@ public class Backend implements BackendInterface {
 					System.out.println(this.data.insert(new KeyItem<Meteorite>(m)));
 			}
 		} catch (Exception e) {
-			System.out.println("unable to read the fileName");
-			e.printStackTrace();
+			// System.out.println("unable to read the fileName");
+			// e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -118,7 +119,7 @@ public class Backend implements BackendInterface {
 		ArrayList<Meteorite> result = new ArrayList<>();
 		double maxMass = Double.MIN_VALUE;
 		for (Meteorite meteorite : data) {
-			System.out.println(meteorite.getMass());
+			//System.out.println(meteorite.getMass());
 			if (meteorite.getMass() > maxMass) {
 				maxMass = meteorite.getMass();
 				result.clear();

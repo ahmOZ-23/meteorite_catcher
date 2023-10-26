@@ -1,5 +1,7 @@
 
-import java.util.Scanner;
+
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,16 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
  *  This class tests the Frontend class and its methods
  */
 public class FrontendDeveloperTesters {
-    BackendInterface backend = new BackendPlaceholder(); //backend object for testing
+    BackendInterface backend; //backend object for testing
 
-    FrontendInterface frontend = new Frontend (backend); // frontend object for testing
+    FrontendInterface frontend;  // frontend object for testing
 
     /**
      * creates a new backend object for each test.
      */
     @BeforeEach
     public void init(){
-        backend = new BackendPlaceholder(); // will be changed by the finial backend implementation
+        backend = new Backend(new IterableMultiKeyRBT<>()); // will be changed by the finial backend implementation
         frontend = new Frontend (backend);
     }
 
@@ -92,11 +94,13 @@ public class FrontendDeveloperTesters {
      */
     @Test
     public void backendTest1(){
-        TextUITester uiTester = new TextUITester("loadfile test.csv\nlist greatest\nexit\n");
-        assertDoesNotThrow(frontend.startLoop(), "Your code throws an exception on a valid command");// should be a scanner in this method
+        TextUITester uiTester = new TextUITester("load src/test.csv\nlist greatest\nexit\n");
+        frontend.startLoop();// should be a scanner in this method
         String  message = uiTester.checkOutput();
+        assertFalse(message.contains("File not found"));
         //checks if the outputted list contains the excpected masses
-        assertTrue(message.contains(107000)); // checks if the outputted list contains valid meteorites
+        System.out.println(message);
+        assertTrue(message.contains("107000")); // checks if the outputted list contains valid meteorites
     }
 
     /**
@@ -105,11 +109,12 @@ public class FrontendDeveloperTesters {
      */
     @Test
     public void backendTest2(){
-        TextUITester uiTester = new TextUITester("list between 10 400\nexit\n");
-        assertDoesNotThrow(frontend.startLoop(), "Your code throws an exception on a valid command");// should be a scanner in this method
+        TextUITester uiTester = new TextUITester("load src/test.csv\nlist between 10 400\nexit\n");
+        frontend.startLoop(); // should be a scanner in this method
         String  message = uiTester.checkOutput();
         //checks if the outputted list contains the excpected masses
-        assertTrue(message.contains(390) && message.contains(21)); // checks if the outputted list contains valid meteorites
+        assertFalse(message.contains("File not found")); // checks if the outputted list contains valid meteorites
+        assertTrue(message.contains("390") && message.contains("21")); // checks if the outputted list contains valid meteorites
     }
 
 
