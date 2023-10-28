@@ -30,10 +30,12 @@ public class FrontendDeveloperTesters {
      */
     @Test
     public void test1(){
-        TextUITester uiTester = new TextUITester("list between 0 0\nexit\n");
+        TextUITester uiTester = new TextUITester("load src/p1/test.csv\nlist between 0 0\nexit\n");
         frontend.startLoop();// should be a scanner in this method
+        String message = uiTester.checkOutput();
+        System.out.println(message);
         // checks if the output contains the error message
-        assertTrue(uiTester.checkOutput().contains("No meteorites found in the given bound"));
+        assertTrue(message.contains("No meteorites found in the given bound"));
     }
 
     /**
@@ -64,16 +66,15 @@ public class FrontendDeveloperTesters {
     }
 
     /**
-     * checks the output of the listGreatestMasses the output should be a list of meteorites with
-     * the maximum mass in the data set.
-     * the outputted list is bound to change by the end of the project so this test will be updated
+     * checks the output if the user enters an invalid file name to the load command
+     *
      */
     @Test
     public void test4(){
-        TextUITester uiTester = new TextUITester("list greatest\nexit\n");
+        TextUITester uiTester = new TextUITester("load *invalid file name*\nexit\n");
         frontend.startLoop();// should be a scanner in this method
         String  message = uiTester.checkOutput();
-        assertTrue(message.contains("Test, 1.0, 1.0, 1.0")); // checks if the outputted list contains valid meteorites
+        assertTrue(message.contains("File not found")); // checks if the outputted list contains valid meteorites
     }
 
     /**
@@ -93,27 +94,29 @@ public class FrontendDeveloperTesters {
      * should return a list of meteorites with the maximum mass in the data set.
      */
     @Test
-    public void backendTest1(){
-        TextUITester uiTester = new TextUITester("load src/test.csv\nlist greatest\nexit\n");
+    public void IntegrationTest1(){
+        TextUITester uiTester = new TextUITester("load src/p1/test.csv\nlist greatest\nexit\n");
         frontend.startLoop();// should be a scanner in this method
         String  message = uiTester.checkOutput();
         assertFalse(message.contains("File not found"));
-        //checks if the outputted list contains the excpected masses
+        //checks if the outputted list contains the expected masses
         System.out.println(message);
         assertTrue(message.contains("107000")); // checks if the outputted list contains valid meteorites
     }
 
     /**
-     * checks the output of the listBetweenMasses sub-menu when the user eenters a valid range
+     * checks the output of the listBetweenMasses sub-menu when the user enters a valid range
      * should return a list of all the meteorites in the given range
      */
     @Test
-    public void backendTest2(){
-        TextUITester uiTester = new TextUITester("load src/test.csv\nlist between 10 400\nexit\n");
+    public void IntegrationTest2(){
+        TextUITester uiTester = new TextUITester("load src/p1/test.csv\nlist between 10 400\nexit\n");
         frontend.startLoop(); // should be a scanner in this method
         String  message = uiTester.checkOutput();
-        //checks if the outputted list contains the excpected masses
-        assertFalse(message.contains("File not found")); // checks if the outputted list contains valid meteorites
+        //checks if the outputted list contains the expected masses
+        assertFalse(message.contains("File not found"));
+        System.out.println(message);
+        // checks if the outputted list contains valid meteorites
         assertTrue(message.contains("390") && message.contains("21")); // checks if the outputted list contains valid meteorites
     }
 

@@ -26,9 +26,19 @@ public class BackendPlaceholder implements BackendInterface{
    *
    * @param fileName the name of the file the data is to be read from.
    */
-  @Override
+
   public void readData(File fileName) {
       // read the data from the file and store it in the RBT
+  }
+
+  /**
+   * Reads data from a CSV formatted file and stsores it as a string.
+   *
+   * @param fileName the name of the file the data is to be read from.
+   */
+  @Override
+  public boolean readData(String fileName) {
+    return false;
   }
 
   /**

@@ -1,3 +1,5 @@
+
+
 public interface FrontendInterface {
  // Scanner input;
  // Backend backend;

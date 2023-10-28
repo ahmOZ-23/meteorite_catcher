@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.BufferedReader;
@@ -25,9 +27,9 @@ public class Backend implements BackendInterface {
 				ArrayList<String> line = arr.get(i);
 				Meteorite m = new Meteor(line.get(0), Double.parseDouble(line.get(7)), Double.parseDouble(line.get(6)),
 						Double.parseDouble(line.get(4)));
-				System.out.println(">>>>>>"+m.getMass());
+				//System.out.println(">>>>>>"+m.getMass());
 				if (data != null)
-					System.out.println(this.data.insert(new KeyItem<Meteorite>(m)));
+					this.data.insert(new KeyItem<Meteorite>(m));
 			}
 		} catch (Exception e) {
 			// System.out.println("unable to read the fileName");

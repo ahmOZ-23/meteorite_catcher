@@ -1,7 +1,13 @@
+
+
+import p1.IterableMultiKeySortedCollectionInterface;
+import p1.KeyListInterface;
+
 import java.util.Iterator;
 import java.util.TreeSet;
 
-public class TempIMKSCI<T extends Comparable<T>> implements IterableMultiKeySortedCollectionInterface<T>{
+public class TempIMKSCI<T extends Comparable<T>> implements
+		IterableMultiKeySortedCollectionInterface<T> {
 	TreeSet<KeyListInterface<T>> ts = new TreeSet<>();
 
 	@Override

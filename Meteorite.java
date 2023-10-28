@@ -1,4 +1,5 @@
 
+
 /**
  * An interface for a class that defines a single meteorite and exposes properties required by the 
  * frontend: name, latitude, longitude, fall, and mass (in grams).

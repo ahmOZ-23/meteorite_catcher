@@ -1,3 +1,5 @@
+
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +30,13 @@ public class Frontend implements FrontendInterface {
      // startLoop(); // start the loop
    }
 
+
+  public static void main(String[] args) {
+    BackendInterface backend = new Backend(new IterableMultiKeyRBT<>());
+    Frontend frontend = new Frontend(backend);
+    frontend.startLoop();
+  }
+
   /**
    * The main method that runs the program and the window that allows the user to interact with the program
    * Starts the loop that allows the user to interact with the program
@@ -38,7 +47,9 @@ public class Frontend implements FrontendInterface {
       input = new Scanner(System.in);
       while (true){
           System.out.println("Please enter a command and parameters (if applicable)\n");
-          String command = input.next().trim();
+          String command;
+          if (input.hasNext()) command= input.next().trim();
+          else { break;}
           if (command.equals("load")){
               loadFile();
               }
@@ -56,6 +67,7 @@ public class Frontend implements FrontendInterface {
             break;
           }
           else {
+              while (input.hasNext()) input.next();
               printError("Invalid command");
           }
       }
@@ -69,12 +81,8 @@ public class Frontend implements FrontendInterface {
     @Override
     public void loadFile() {
       if (!input.hasNext()) printError("No file name entered");
-      try {
-          backend.readData(new File(input.next()));
-        }catch(Exception e){
-          printError("Invalid file name or file not found");
-        }
-      System.out.println("File loaded");
+      if(backend.readData(input.next())) System.out.println("File loaded successfully");
+      else printError("File not found");
     }
 
   /**
@@ -105,8 +113,8 @@ public class Frontend implements FrontendInterface {
        printError("your lower bound is greater than your upper bound");
       ArrayList<Meteorite> list = backend.listBoundedMass(lowBound, upBound);
 
-      if (list != null) System.out.println(list);
-     printError("No meteorites found in the given bound");
+      if (!list.isEmpty()) System.out.println(displayList(list));
+    else  printError("No meteorites found in the given bound");
    }
 
   /**
@@ -116,8 +124,8 @@ public class Frontend implements FrontendInterface {
   @Override
     public void listGreatestMasses() {
     ArrayList<Meteorite> list = backend.listMaxMass();
-    if (list != null) System.out.println(list);
-    printError("No meteorites found");
+    if (!list.isEmpty()) System.out.println(displayList(list));
+    else printError("No meteorites found");
     }
 
   /**
@@ -128,6 +136,15 @@ public class Frontend implements FrontendInterface {
     public void exit() {
      System.out.println("Exiting...");
      input.close();
+   }
+
+   private String displayList(ArrayList<Meteorite> list) {
+     String result = "===========================================================\nname, latitude, fall, mass\n----------------------------------------------------------\n";
+     for (Meteorite m : list) {
+       result += m.toString() + "\n----------------------------------------------------------\n";
+     }
+     result += "===========================================================\n";
+     return result;
    }
 
   /**
