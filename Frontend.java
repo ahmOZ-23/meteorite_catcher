@@ -47,9 +47,9 @@ public class Frontend implements FrontendInterface {
       loop:
     while (true){
         System.out.println("Please enter a command and parameters (if applicable): \n");
-        String command;
-        if (input.hasNext()) command= input.next().trim();
-        else  break;
+
+        String command= input.next().trim();
+
         //read the command and call the appropriate method
         switch (command) {
           case "load":
@@ -69,9 +69,6 @@ public class Frontend implements FrontendInterface {
             exit();
             break loop;
           default:
-           // clearing out the scanner if there is more than one word entered
-            while (input.hasNext())
-              input.next();
             //if the command is invalid, print an error message
             printError("Invalid command");
             break;
