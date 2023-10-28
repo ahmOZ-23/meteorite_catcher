@@ -8,7 +8,7 @@ CLASSFILES	:= $(patsubst %.java,%.class,$(wildcard *.java))
 default: runFrontend
 
 %.class : %.java
-	$(JAVAC) -cp .:$(JUNIT) $<
+	$(JAVAC) -cp .:../$(JUNIT) $<
 
 runBDTests: $(CLASSFILES)
 	$(JAVA) -jar $(JUNIT) -cp . --select-class=$(BDTESTCLASS)
