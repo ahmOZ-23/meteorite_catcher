@@ -60,7 +60,7 @@ public class BackendPlaceholder implements BackendInterface{
   public ArrayList<Meteorite> listBoundedMass(double lowerBound, double higherBound) {
     ArrayList<Meteorite> list = new ArrayList<>();
     list.add(new MeteoritePlaceholder());
-    if (lowerBound == higherBound) return null; // added for testing purposes
+    if (lowerBound == higherBound) return new ArrayList<>() ; // added for testing purposes
     return list;
   }
 }
