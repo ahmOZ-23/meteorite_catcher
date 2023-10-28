@@ -1,5 +1,3 @@
-
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.BufferedReader;
@@ -16,24 +14,22 @@ public class Backend implements BackendInterface {
 
 	/**
 	 * Reads data from a CSV formatted file and stores it as a string.
-	 * 
+	 *
 	 * @param fileName the name of the file the data is to be read from.
 	 */
-	@Override
-	public boolean readData (String fileName) {
+	public boolean readData(String fileName) {
 		try {
 			arr = parseCSV(fileName);
 			for (int i = 1; i < arr.size(); ++i) {
 				ArrayList<String> line = arr.get(i);
 				Meteorite m = new Meteor(line.get(0), Double.parseDouble(line.get(7)), Double.parseDouble(line.get(6)),
 						Double.parseDouble(line.get(4)));
-				//System.out.println(">>>>>>"+m.getMass());
 				if (data != null)
 					this.data.insert(new KeyItem<Meteorite>(m));
 			}
 		} catch (Exception e) {
-			// System.out.println("unable to read the fileName");
-			// e.printStackTrace();
+			//System.out.println("unable to read the fileName");
+			//e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -56,45 +52,44 @@ public class Backend implements BackendInterface {
 				c = (char) br.read();
 			}
 			switch (c) {
-			case '\r':
-				// Ignore CR
-				break;
-			case '\n':
-				if (!token.isEmpty()) {
-					line_list.add(token);
-					token = "";
-				}
-				ret.add(line_list);
-				System.out.println(line_list);
-				line_list = new ArrayList<>();
-				break;
-			case '"':
-				if (!inTok) {
-					inTok = true;
+				case '\r':
+					// Ignore CR
 					break;
-				} else {
-					char cnext = (char) br.read();
-					if (cnext == '"') {
-						token += '"';
+				case '\n':
+					if (!token.isEmpty()) {
+						line_list.add(token);
+						token = "";
+					}
+					ret.add(line_list);
+					line_list = new ArrayList<>();
+					break;
+				case '"':
+					if (!inTok) {
+						inTok = true;
 						break;
 					} else {
-						cache = cnext;
-						cacheValid = true;// Buffer char
-						inTok = false;
-						break;
+						char cnext = (char) br.read();
+						if (cnext == '"') {
+							token += '"';
+							break;
+						} else {
+							cache = cnext;
+							cacheValid = true;// Buffer char
+							inTok = false;
+							break;
+						}
 					}
-				}
-			case ',':
-				if (inTok) {
-					token += ',';
-				} else {
-					line_list.add(token);
-					token = "";
-				}
-				break;
-			default:
-				token += c;
-				break;
+				case ',':
+					if (inTok) {
+						token += ',';
+					} else {
+						line_list.add(token);
+						token = "";
+					}
+					break;
+				default:
+					token += c;
+					break;
 			}
 
 		}
@@ -120,8 +115,7 @@ public class Backend implements BackendInterface {
 	public ArrayList<Meteorite> listMaxMass() {
 		ArrayList<Meteorite> result = new ArrayList<>();
 		double maxMass = Double.MIN_VALUE;
-		for (Meteorite meteorite : data) {
-			//System.out.println(meteorite.getMass());
+		for (Meteorite meteorite : this.data) {
 			if (meteorite.getMass() > maxMass) {
 				maxMass = meteorite.getMass();
 				result.clear();
@@ -150,12 +144,12 @@ public class Backend implements BackendInterface {
 		return result;
 	}
 
-//	@Override
-//	public void readData(String fileName) {
-//		try {
-//			parseCSV(fileName);
-//		} catch (Exception e) {
-//			System.out.println("unable to read the fileName");
-//		}
-//	}
+	//	@Override
+	//	public void readData(String fileName) {
+	//		try {
+	//			parseCSV(fileName);
+	//		} catch (Exception e) {
+	//			System.out.println("unable to read the fileName");
+	//		}
+	//	}
 }

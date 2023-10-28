@@ -1,8 +1,8 @@
 
 
-import java.io.File;
+
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 /**
@@ -27,7 +27,6 @@ public class Frontend implements FrontendInterface {
    */
    public Frontend(BackendInterface backend){
      this.backend = backend;
-     // startLoop(); // start the loop
    }
 
 
@@ -45,33 +44,40 @@ public class Frontend implements FrontendInterface {
     public void startLoop() {
       System.out.println("Welcome to the meteorite database!\n"+ listOfCommands + "\n");
       input = new Scanner(System.in);
-      while (true){
-          System.out.println("Please enter a command and parameters (if applicable)\n");
-          String command;
-          if (input.hasNext()) command= input.next().trim();
-          else { break;}
-          if (command.equals("load")){
-              loadFile();
-              }
-          else if (command.contains("list")){
-            command = input.next().trim();
-            if (command.contains("between")){
-                  listBetweenMasses();
-              }
-            else if (command.contains("greatest")){
-                  listGreatestMasses();
-              }
-          }
-          else if (command.equals("exit")){
-            exit();
+      loop:
+    while (true){
+        System.out.println("Please enter a command and parameters (if applicable): \n");
+        String command;
+        if (input.hasNext()) command= input.next().trim();
+        else  break;
+        //read the command and call the appropriate method
+        switch (command) {
+          case "load":
+            //loads the file that the user enters
+            loadFile();
             break;
-          }
-          else {
-              while (input.hasNext()) input.next();
-              printError("Invalid command");
-          }
-      }
+          case "listGreatest":
+            //list the greatest meteorites in the data set
+            listGreatestMasses();
+            break;
+          case "listBetween":
+            //list all the meteorites in the specified bounds
+            listBetweenMasses();
+            break;
+          case "exit":
+            //exits the program
+            exit();
+            break loop;
+          default:
+           // clearing out the scanner if there is more than one word entered
+            while (input.hasNext())
+              input.next();
+            //if the command is invalid, print an error message
+            printError("Invalid command");
+            break;
+        }
     }
+  }
 
   /**
    * Loads the file that the user enters
@@ -138,6 +144,11 @@ public class Frontend implements FrontendInterface {
      input.close();
    }
 
+  /**
+   * Displays the list of meteorites in a readable format to the user
+   * @param list the list of meteorites to be displayed
+   * @return String representation of the list of meteorites
+   */
    private String displayList(ArrayList<Meteorite> list) {
      String result = "===========================================================\nname, latitude, fall, mass\n----------------------------------------------------------\n";
      for (Meteorite m : list) {

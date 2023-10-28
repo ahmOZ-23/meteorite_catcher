@@ -5,7 +5,7 @@ BDTESTCLASS	:= BackendDeveloperTests
 FDTESTCLASS	:= FrontendDeveloperTesters
 CLASSFILES	:= $(patsubst %.java,%.class,$(wildcard *.java))
 
-default: runTests
+default: runFrontend
 
 %.class : %.java
 	$(JAVAC) -cp .:$(JUNIT) $<
@@ -18,6 +18,9 @@ runFDTests: $(CLASSFILES)
 
 run: $(CLASSFILES)
 	$(JAVA) -cp . Main.java
+
+runFrontend: $(CLASSFILES)
+	$(JAVA) -cp . --select-class=FrontendDeveloper
 
 runTests: runBDTests runFDTests
 
